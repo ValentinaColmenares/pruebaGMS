@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,6 +14,8 @@ import com.example.gms.dto.GradeDto;
 import com.example.gms.service.GradeService;
 
 import lombok.AllArgsConstructor;
+
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -38,4 +41,26 @@ public class GradeController {
     return ResponseEntity.ok(grades);
   }
   
+  // Build Get All Grades REST API
+  @GetMapping
+  public ResponseEntity<List<GradeDto>> getAllGrades() {
+      List<GradeDto> grades = gradeService.getAllGrades();
+      return ResponseEntity.ok(grades);
+  }
+
+  // Build Update Grade REST API
+  @PutMapping("{id}")
+  public ResponseEntity<GradeDto> updateGrade(@PathVariable("id") Long gradeId, 
+                                              @RequestBody GradeDto updatedGrade) {
+      GradeDto gradeDto = gradeService.updateGrade(gradeId, updatedGrade);
+      return ResponseEntity.ok(gradeDto);
+  }
+
+  // Build Delete Grade REST API
+    @DeleteMapping("{id}")
+    public ResponseEntity<String> deleteGrade(@PathVariable("id") Long gradeId){
+        gradeService.deleteGrade(gradeId);
+        return ResponseEntity.ok("Grade deleted successfully!");
+  }
+
 }

@@ -60,6 +60,6 @@ public class StudentController {
     public ResponseEntity<String> deleteStudent(@PathVariable("id") Long studentId){
         studentService.deleteStudent(studentId);
         return ResponseEntity.ok("Student deleted successfully!");
-    }
+  }
 
 }

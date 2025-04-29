@@ -7,5 +7,11 @@ import com.example.gms.dto.GradeDto;
 public interface GradeService {
   GradeDto createGrade(GradeDto gradeDto);
 
-  List<GradeDto> getGradesByStudentId(Long idStudent);
+  List<GradeDto> getGradesByStudentId(Long studentId);
+
+  List<GradeDto> getAllGrades();
+
+  GradeDto updateGrade(Long gradeId, GradeDto updatedGrade);
+
+  void deleteGrade(Long gradeId);
 }

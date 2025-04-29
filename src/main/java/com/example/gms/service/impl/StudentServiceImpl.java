@@ -44,7 +44,7 @@ public class StudentServiceImpl implements StudentService{
   @Override
   public StudentDto updateStudent(Long studentId, StudentDto updatedStudent) {
     Student student = studentRepository.findById(studentId).orElseThrow(
-                      () -> new ResourceNotFoundException("Student is not exists with given id: " + studentId)
+      () -> new ResourceNotFoundException("Student is not exists with given id: " + studentId)
     );
 
     student.setName(updatedStudent.getName());

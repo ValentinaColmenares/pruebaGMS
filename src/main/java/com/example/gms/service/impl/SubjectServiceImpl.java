@@ -44,7 +44,7 @@ public class SubjectServiceImpl implements SubjectService {
   @Override
   public SubjectDto updateSubject(Integer subjectId, SubjectDto updatedSubject){
     Subject subject = subjectRepository.findById(subjectId).orElseThrow(
-                      () -> new ResourceNotFoundException("Subject in not exists with given id: " + subjectId)
+      () -> new ResourceNotFoundException("Subject in not exists with given id: " + subjectId)
     );
 
     subject.setName(updatedSubject.getName());
