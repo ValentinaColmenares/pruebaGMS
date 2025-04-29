@@ -1,12 +1,15 @@
 package com.example.gms.entity;
 
 import java.time.LocalDate;
+import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -36,5 +39,16 @@ public class Student {
 
   @Column(name = "fecha_nacimiento")
   private LocalDate birthDate;
+
+  @OneToMany(mappedBy = "idStudent", cascade = CascadeType.ALL, orphanRemoval = true)
+  private List<Grade> grades;
+
+  public Student(Long id, String name, String lastName, String email, LocalDate birthDate) {
+    this.id = id;
+    this.name = name;
+    this.lastName = lastName;
+    this.email = email;
+    this.birthDate = birthDate;
+  }
 
 }
