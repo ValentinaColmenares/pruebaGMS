@@ -22,11 +22,9 @@ public class StudentServiceImpl implements StudentService{
 
   @Override
   public StudentDto createStudent(StudentDto studentDto) {
-   
     Student student = StudentMapper.mapToStudent(studentDto);
     Student savedStudent = studentRepository.save(student);
     return StudentMapper.mapToStudentDto(savedStudent);
-
   }
 
   @Override
@@ -45,7 +43,6 @@ public class StudentServiceImpl implements StudentService{
 
   @Override
   public StudentDto updateStudent(Long studentId, StudentDto updatedStudent) {
-    
     Student student = studentRepository.findById(studentId).orElseThrow(
                       () -> new ResourceNotFoundException("Student is not exists with given id: " + studentId)
     );
@@ -62,7 +59,6 @@ public class StudentServiceImpl implements StudentService{
 
   @Override
   public void deleteStudent(Long studentId) {
-    
     Student student = studentRepository.findById(studentId).orElseThrow(
       () -> new ResourceNotFoundException("Student is not exists with given id: " + studentId)
     );
