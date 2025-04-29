@@ -1,5 +1,6 @@
 package com.example.gms.entity;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import jakarta.persistence.Column;
@@ -27,22 +28,22 @@ public class Grade {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Integer id;
+  private Long id;
 
   @DecimalMin(value = "0.0")
   @DecimalMax(value = "5.0")
   @Column(name = "valor", precision = 3, scale = 1)
-  private Double value;
+  private BigDecimal value;
 
   @Column(name = "fecha_registro")
   private LocalDate registrationDate;
 
   @ManyToOne(optional = false)
   @JoinColumn(name = "id_alumno", referencedColumnName = "id")
-  private Long idStudent;
+  private Student idStudent;
 
   @ManyToOne(optional = false)
   @JoinColumn(name = "id_materia", referencedColumnName = "id")
-  private Integer idSubject;
-
+  private Subject idSubject;
+  
 }

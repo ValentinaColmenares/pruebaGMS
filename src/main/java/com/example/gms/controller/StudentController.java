@@ -13,7 +13,9 @@ import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -49,4 +51,19 @@ public class StudentController {
       return ResponseEntity.ok(students);
   }
    
+  // Build Update Student REST API
+  @PutMapping("{id}")
+  public ResponseEntity<StudentDto> updateStudent(@PathVariable("id") Long studentId, 
+                                                  @RequestBody StudentDto updatedStudent) {
+      StudentDto studentDto = studentService.updateStudent(studentId, updatedStudent);
+      return ResponseEntity.ok(studentDto);
+  }
+
+  // Build Delete Student REST API
+    @DeleteMapping("{id}")
+    public ResponseEntity<String> deleteStudent(@PathVariable("id") Long studentId){
+        studentService.deleteStudent(studentId);
+        return ResponseEntity.ok("Student deleted successfully!");
+    }
+
 }

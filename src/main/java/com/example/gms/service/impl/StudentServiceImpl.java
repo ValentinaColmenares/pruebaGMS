@@ -43,4 +43,31 @@ public class StudentServiceImpl implements StudentService{
                       .collect(Collectors.toList());
   }
 
+  @Override
+  public StudentDto updateStudent(Long studentId, StudentDto updatedStudent) {
+    
+    Student student = studentRepository.findById(studentId).orElseThrow(
+                      () -> new ResourceNotFoundException("Student is not exists with given id: " + studentId)
+    );
+
+    student.setName(updatedStudent.getName());
+    student.setLastName(updatedStudent.getLastName());
+    student.setEmail(updatedStudent.getEmail());
+    student.setBirthDate(updatedStudent.getBirthDate());
+
+    Student updatedStudentObj = studentRepository.save(student);
+
+    return StudentMapper.mapToStudentDto(updatedStudentObj);
+  }
+
+  @Override
+  public void deleteStudent(Long studentId) {
+    
+    Student student = studentRepository.findById(studentId).orElseThrow(
+      () -> new ResourceNotFoundException("Student is not exists with given id: " + studentId)
+    );
+    
+    studentRepository.deleteById(studentId);
+  }
+
 }
