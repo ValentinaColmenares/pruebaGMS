@@ -1,5 +1,8 @@
 package com.example.gms.service.impl;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.stereotype.Service;
 
 import com.example.gms.dto.GradeDto;
@@ -21,6 +24,13 @@ public class GradeServiceImpl implements GradeService{
     Grade grade = GradeMapper.mapToGrade(gradeDto);
     Grade savedGrade = gradeRepository.save(grade);
     return GradeMapper.mapToGradeDto(savedGrade);   
+  }
+
+  @Override
+  public List<GradeDto> getGradesByStudentId(Long idStudent) {
+    List<Grade> grades = gradeRepository.findByIdStudent_Id(idStudent);
+    return grades.stream().map((grade) -> GradeMapper.mapToGradeDto(grade))
+            .collect(Collectors.toList());
   }
 
 }
