@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.gms.dto.SubjectDto;
 import com.example.gms.entity.Subject;
+import com.example.gms.exception.ResourceDuplicatedException;
 import com.example.gms.exception.ResourceNotFoundException;
 import com.example.gms.mapper.SubjectMapper;
 import com.example.gms.repository.SubjectRepository;
@@ -22,6 +23,10 @@ public class SubjectServiceImpl implements SubjectService {
 
   @Override
   public SubjectDto createSubject(SubjectDto subjectDto) {
+    subjectRepository.findByCode(subjectDto.getCode()).ifPresent(
+      subject -> {
+        throw new ResourceDuplicatedException("Subject already exixts with with given code : " + subjectDto.getCode());
+    });
     Subject subject = SubjectMapper.mapToSubject(subjectDto);
     Subject savedStudent = subjectRepository.save(subject);
     return SubjectMapper.mapToSubjectDto(savedStudent);

@@ -73,7 +73,7 @@ public class GradeServiceImpl implements GradeService{
 
   @Override
   public void deleteGrade(Long gradeId) {
-    Grade grade = gradeRepository.findById(gradeId).orElseThrow(
+    gradeRepository.findById(gradeId).orElseThrow(
       () -> new ResourceNotFoundException("Grade is not exists with given id: " + gradeId)
     );
     

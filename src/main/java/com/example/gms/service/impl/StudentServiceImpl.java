@@ -30,7 +30,8 @@ public class StudentServiceImpl implements StudentService{
   @Override
   public StudentDto getStudentById(Long studentId) {
     Student student = studentRepository.findById(studentId).orElseThrow(() -> 
-                      new ResourceNotFoundException("Student is not exists with given id : " + studentId));
+                      new ResourceNotFoundException("Student is not exists with given id : " + studentId)
+    );
     return StudentMapper.mapToStudentDto(student);
   }
 
